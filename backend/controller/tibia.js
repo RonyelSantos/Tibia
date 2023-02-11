@@ -21,7 +21,7 @@ const tibia_scrap = async (character) => {
     executablePath: executablePath(),
     //executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe', //local servidor
     //'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-    headless: false,
+    headless: true,
     args: [
       '--ash-force-desktop',
       '--disable-setuid-sandbox',
