@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>player_on</name>
+    <name>character</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -438,33 +439,73 @@
   <order>
     <hop>
       <from>Data grid</from>
-      <to>Modified JavaScript value</to>
+      <to>JS JSON</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Modified JavaScript value</from>
-      <to>REST client</to>
+      <from>JS JSON</from>
+      <to>REST RPA</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>REST client</from>
-      <to>JSON input</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>JSON input</from>
-      <to>Modified JavaScript value 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Modified JavaScript value 2</from>
+      <from>JS MESSAGEM TELEGRAM</from>
       <to>TELEGRAM EXECUTOR</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Data grid 2</from>
-      <to>Modified JavaScript value</to>
+      <to>JS JSON</to>
       <enabled>N</enabled>
+    </hop>
+    <hop>
+      <from>WRITE LOG 200</from>
+      <to>JSON INPUT</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch / case</from>
+      <to>WRITE LOG 200</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch / case</from>
+      <to>WRITE LOG 401</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch / case</from>
+      <to>WRITE TO LOG 400</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Switch / case</from>
+      <to>WRITE TO LOG 500</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>REST RPA</from>
+      <to>Get system info</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get system info</from>
+      <to>Switch / case</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>JSON INPUT</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Replace in string</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Replace in string</from>
+      <to>JS MESSAGEM TELEGRAM</to>
+      <enabled>Y</enabled>
     </hop>
   </order>
   <step>
@@ -514,6 +555,9 @@
       <line>
         <item>Nexorr</item>
       </line>
+      <line>
+        <item>Satan Tyrant</item>
+      </line>
     </data>
     <attributes/>
     <cluster_schema/>
@@ -530,7 +574,51 @@
     </GUI>
   </step>
   <step>
-    <name>JSON input</name>
+    <name>Data grid 2</name>
+    <type>DataGrid</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>char</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+        <field_null_if/>
+      </field>
+    </fields>
+    <data>
+      <line>
+        <item>Dreadmawmaw</item>
+      </line>
+    </data>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JSON INPUT</name>
     <type>JsonInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -574,8 +662,8 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>xp_ontem</name>
-        <path>$..xp_ontem</path>
+        <name>sex</name>
+        <path>$..sex</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -587,8 +675,125 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>message</name>
-        <path>$..message</path>
+        <name>vocation</name>
+        <path>$..vocation</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>level</name>
+        <path>$..level</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>world</name>
+        <path>$..world</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>guild</name>
+        <path>$..guild</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>last_login</name>
+        <path>$..last_login</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>online</name>
+        <path>$..online</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>xp_yesterday</name>
+        <path>$..xp_yesterday</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>total_in_month</name>
+        <path>$..total_in_month</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>record_xp</name>
+        <path>$..record_xp</path>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>last_death</name>
+        <path>$..last_death</path>
         <type>String</type>
         <format/>
         <currency/>
@@ -621,13 +826,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>640</xloc>
+      <xloc>1072</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Modified JavaScript value</name>
+    <name>JS JSON</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -645,7 +850,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var json = {
 
-	"character": character.toString()
+	"character": char.toString()
 }
 
 var json = JSON.stringify(json);</jsScript_script>
@@ -676,7 +881,7 @@ var json = JSON.stringify(json);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Modified JavaScript value 2</name>
+    <name>JS MESSAGEM TELEGRAM</name>
     <type>ScriptValueMod</type>
     <description/>
     <distribute>Y</distribute>
@@ -694,8 +899,7 @@ var json = JSON.stringify(json);</jsScript_script>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>//var message_telegram = "[RPA Scrap IT] \\n Servidor: "+nome+" \\n Player on: "+qtd_player+" \\n Representando: "+representando+" \\n ------------------------ \\n Servidor: "+nome2+" \\n Player on: "+qtd_player2+" \\n Representando: "+representando2+" \\n ------------------------ \\n Servidor: "+nome3+" \\n Player on: "+qtd_player3+" \\n Representando: "+representando3+" \\n ------------------------ \\n Servidor: "+nome4+" \\n Player on: "+qtd_player4+" \\n Representando: "+representando4+" \\n ------------------------ \\n Servidor: "+nome5+" \\n Player on: "+qtd_player5+" \\n Representando: "+representando5+" \\n ------------------------ \\n [Para doações via pix vem de inbox]";
 
-var message_telegram = "[RPA Scrap IT]\\n"+message;
-;</jsScript_script>
+var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName: "+character+"\\nLevel: "+level+"\\nVocation: "+vocation+"\\nWorld: "+world+"\\nSex: "+sex+"\\nGuild: "+guild+"\\nStatus: "+online+"\\nLast Login: "+last_login+"\\nXp feita ontem: "+xp_yesterday+"\\nTotal de xp no mês: "+total_in_month+"\\nRecord de xp: "+record_xp+"\\nÚltima morte: "+last_death;</jsScript_script>
       </jsScript>
     </jsScripts>
     <fields>
@@ -717,13 +921,13 @@ var message_telegram = "[RPA Scrap IT]\\n"+message;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>1408</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>REST client</name>
+    <name>REST RPA</name>
     <type>Rest</type>
     <description/>
     <distribute>Y</distribute>
@@ -735,7 +939,7 @@ var message_telegram = "[RPA Scrap IT]\\n"+message;
     </partitioning>
     <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url>http://localhost:3300/linkedin</url>
+    <url>http://167.71.16.201:3300/tibia_scrap</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
@@ -828,14 +1032,195 @@ var message_telegram = "[RPA Scrap IT]\\n"+message;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1152</xloc>
+      <xloc>1760</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Data grid 2</name>
-    <type>DataGrid</type>
+    <name>Switch / case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fieldname>status_code</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>None</case_value_type>
+    <case_value_format/>
+    <case_value_decimal/>
+    <case_value_group/>
+    <default_target_step/>
+    <cases>
+      <case>
+        <value>200</value>
+        <target_step>WRITE LOG 200</target_step>
+      </case>
+      <case>
+        <value>401</value>
+        <target_step>WRITE LOG 401</target_step>
+      </case>
+      <case>
+        <value>400</value>
+        <target_step>WRITE TO LOG 400</target_step>
+      </case>
+      <case>
+        <value>500</value>
+        <target_step>WRITE TO LOG 500</target_step>
+      </case>
+    </cases>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>WRITE LOG 200</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>Sucesso:</logmessage>
+    <fields>
+      <field>
+        <name>result</name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>WRITE LOG 401</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>401:</logmessage>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>480</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>WRITE TO LOG 500</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>500:</logmessage>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>915</xloc>
+      <yloc>730</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>WRITE TO LOG 400</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>400:</logmessage>
+    <fields>
+      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>912</xloc>
+      <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get system info</name>
+    <type>SystemInfo</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -846,23 +1231,10 @@ var message_telegram = "[RPA Scrap IT]\\n"+message;
     </partitioning>
     <fields>
       <field>
-        <name>character</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-        <field_null_if/>
+        <name>data_hora</name>
+        <type>system date (variable)</type>
       </field>
     </fields>
-    <data>
-      <line>
-        <item>Dreadmawmaw</item>
-      </line>
-    </data>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -872,8 +1244,116 @@ var message_telegram = "[RPA Scrap IT]\\n"+message;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>205</xloc>
-      <yloc>261</yloc>
+      <xloc>624</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>data_hora</name>
+        <rename>data_hora</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace in string</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>sex</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>level</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>world</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1280</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

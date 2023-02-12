@@ -45,6 +45,72 @@ const tibia_scrap = async (character) => {
     await page.goto(`https://guildstats.eu/character?nick=${character}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
     console.log('IT Scrap Robot | Pagina carregada.')
 
+
+    
+
+    const h1 = await page.$('#tab1 > table > tbody > tr:nth-child(1) > td:nth-child(2) > h1');
+    const text = await page.evaluate(h1 => h1.textContent, h1);
+    if (character != text) {
+      console.log(`IT Scrap Robot | ${character} é diferente de ${text}`)
+      console.log('❌-->Robot stop working!', error)
+      browser.close()
+      return { statuscode: 401, message: `${character} é diferente de ${text}` };
+
+    }
+    console.log('IT Scrap Robot | Nome do personagem confere com o da página carregada.')
+
+    let geral = await page.$$eval('#tab1 > table > tbody > tr', rows => {
+      return Array.from(rows, row => {
+        const columns = row.querySelectorAll('td');
+        return Object.assign({}, Array.from(columns, column => column.innerText))
+      });
+    });
+
+    let sexo = geral.find(item => item["0"] === "Sex:");
+    const result_sexo = sexo ? sexo["1"] : null;
+
+    let vocacao = geral.find(item => item["0"] === "Vocation:");
+    const result_vocacao = vocacao ? vocacao["1"] : null;
+
+    let level = geral.find(item => item["0"] === "Level:");
+    let result_level_ = level ? level["1"] : null;
+    const result_level = result_level_.replace(/\(.*\)/, "");
+
+    let mundo = geral.find(item => item["0"] === "World:");
+    const result_mundo = mundo ? mundo["1"] : null;
+
+    let guild = geral.find(item => item["0"] === "Guild:");
+    const result_guild = guild ? guild["1"] : null;
+
+    let last_login = geral.find(item => item["0"] === "Last login:");
+    const result_last_login = last_login ? last_login["1"] : null;
+
+    let online = geral.find(item => item["0"] === "Online:");
+    const result_online = online ? online["1"] : null;
+
+    let mortes_geral = await page.$$eval('#deathContent > table > tbody > tr', rows => {
+      return Array.from(rows, row => {
+        const columns = row.querySelectorAll('td');
+        return Object.assign({}, Array.from(columns, column => column.innerText))
+      });
+    });
+
+    let ultima_morte_dia_ = mortes_geral[0][1]
+    let ultima_morte_dia = ultima_morte_dia_.substr(0, 10);
+
+    let ultima_morte_criatura = mortes_geral[0][2]
+
+    let ultima_morte_level = mortes_geral[0][3]
+
+    let ultima_morte_xp = mortes_geral[0][4]
+
+
+    const h2 = await page.$('#tab7 > table:nth-child(8) > tfoot > tr > th:nth-child(2)');
+    const xp_mensal = await page.evaluate(h2 => h2.textContent, h2);
+    
+    const h3 = await page.$('#tab7 > table:nth-child(4) > tbody > tr > td:nth-child(2)');
+    const xp_record = await page.evaluate(h3 => h3.textContent, h3);
+
     let dias1 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
       return Array.from(rows, row => {
         const columns = row.querySelectorAll('td');
@@ -55,135 +121,33 @@ const tibia_scrap = async (character) => {
     let xp_ontem1 = dias1[29][1];
     let xp_anteontem1 = dias1[28][1];
     console.log('IT Scrap Robot | Dados capturados.')
-    // await page.goto(`https://guildstats.eu/character?nick=${character2}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-    // let dias2 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
-    //   return Array.from(rows, row => {
-    //     const columns = row.querySelectorAll('td');
-    //     return Object.assign({}, Array.from(columns, column => column.innerText))
-    //   });
-    // });
-
-    // let xp_ontem2 = dias2[29][1];
-    // let xp_anteontem2 = dias2[28][1];
-
-    // await page.goto(`https://guildstats.eu/character?nick=${character3}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-    // let dias3 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
-    //   return Array.from(rows, row => {
-    //     const columns = row.querySelectorAll('td');
-    //     return Object.assign({}, Array.from(columns, column => column.innerText))
-    //   });
-    // });
-
-    // let xp_ontem3 = dias3[29][1];
-    // let xp_anteontem3 = dias3[28][1];
-
-    // await page.goto(`https://guildstats.eu/character?nick=${character4}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-    // let dias4 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
-    //   return Array.from(rows, row => {
-    //     const columns = row.querySelectorAll('td');
-    //     return Object.assign({}, Array.from(columns, column => column.innerText))
-    //   });
-    // });
-
-    // let xp_ontem4 = dias4[29][1];
-    // let xp_anteontem4 = dias4[28][1];
-
-    // await page.goto(`https://guildstats.eu/character?nick=${character5}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-    // let dias5 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
-    //   return Array.from(rows, row => {
-    //     const columns = row.querySelectorAll('td');
-    //     return Object.assign({}, Array.from(columns, column => column.innerText))
-    //   });
-    // });
-
-    // let xp_ontem5 = dias5[29][1];
-    // let xp_anteontem5 = dias5[28][1];
-
-    // await page.goto(`https://guildstats.eu/character?nick=${character6}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-    // let dias6 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
-    //   return Array.from(rows, row => {
-    //     const columns = row.querySelectorAll('td');
-    //     return Object.assign({}, Array.from(columns, column => column.innerText))
-    //   });
-    // });
-
-    // let xp_ontem6 = dias6[29][1];
-    // let xp_anteontem6 = dias6[28][1];
-
-    // await page.goto(`https://guildstats.eu/character?nick=${character7}`, { waitUntil: 'domcontentloaded', timeout: 20000 });
-
-    // let dias7 = await page.$$eval('#tab7 > table:nth-child(8) > tbody > tr', rows => {
-    //   return Array.from(rows, row => {
-    //     const columns = row.querySelectorAll('td');
-    //     return Object.assign({}, Array.from(columns, column => column.innerText))
-    //   });
-    // });
-
-    // let xp_ontem7 = dias7[29][1];
-    // let xp_anteontem7 = dias7[28][1];
 
     
 
     let xp_ontem1_count = xp_ontem1.replace(/[^0-9]/g, "");
-    // let xp_ontem2_count = xp_ontem2.replace(/[^0-9]/g, "");
-    // let xp_ontem3_count = xp_ontem3.replace(/[^0-9]/g, "");
-    // let xp_ontem4_count = xp_ontem4.replace(/[^0-9]/g, "");
-    // let xp_ontem5_count = xp_ontem5.replace(/[^0-9]/g, "");
-    // let xp_ontem6_count = xp_ontem6.replace(/[^0-9]/g, "");
-    // let xp_ontem7_count = xp_ontem7.replace(/[^0-9]/g, "");
 
     let array1 = {
       character: character,
-      xp_ontem: xp_ontem1,
-      message: 'De acordo com o GuildStats.eu, o personagem '+character+' fez um total de '+xp_ontem1+' xp no dia de ontem.'
+      sex: result_sexo,
+      vocation: result_vocacao,
+      level: result_level,
+      world: result_mundo,
+      guild: result_guild,
+      last_login: result_last_login,
+      online: result_online,
+      xp_yesterday: xp_ontem1,
+      total_in_month: xp_mensal,
+      record_xp: xp_record,
+      last_death: 'Level '+ultima_morte_level+' no dia '+ultima_morte_dia+' para '+ultima_morte_criatura+' perdendo um total de '+ultima_morte_xp+ ' xp.'
     }
-    // let array2 = {
-    //   character: character2,
-    //   xp_ontem: xp_ontem2
-    // }
-    // let array3 = {
-    //   character: character3,
-    //   xp_ontem: xp_ontem3
-    // }
-    // let array4 = {
-    //   character: character4,
-    //   xp_ontem: xp_ontem4
-    // }
-    // let array5 = {
-    //   character: character5,
-    //   xp_ontem: xp_ontem5
-    // }
-    // let array6 = {
-    //   character: character6,
-    //   xp_ontem: xp_ontem6
-    // }
-    // let array7 = {
-    //   character: character7,
-    //   xp_ontem: xp_ontem7
-    // }
 
     let array_result = []
     array_result.push(array1)
+    //array_result.push(geral)
+    
     console.log('IT Scrap Robot | Json estruturado.')
     console.log(array_result)
 
-
-    //console.log('De acordo com o GuildStats.eu, o personagem ' + character1 + ' fez um total de ' + xp_ontem1 + ' xp no dia de ontem.\nDe acordo com o GuildStats.eu, o personagem ' + character2 + ' fez um total de ' + xp_ontem2 + ' xp no dia de ontem.\nDe acordo com o GuildStats.eu, o personagem ' + character3 + ' fez um total de ' + xp_ontem3 + ' xp no dia de ontem.\nDe acordo com o GuildStats.eu, o personagem ' + character4 + ' fez um total de ' + xp_ontem4 + ' xp no dia de ontem.\nDe acordo com o GuildStats.eu, o personagem ' + character5 + ' fez um total de ' + xp_ontem5 + ' xp no dia de ontem.\nDe acordo com o GuildStats.eu, o personagem ' + character6 + ' fez um total de ' + xp_ontem6 + ' xp no dia de ontem.\nDe acordo com o GuildStats.eu, o personagem ' + character7 + ' fez um total de ' + xp_ontem7 + ' xp no dia de ontem.')
-      //console.log('De acordo com o GuildStats.eu, o personagem '+character+' fez um total de '+xp_ontem1+' xp no dia de ontem.')
-    //  console.log('De acordo com o GuildStats.eu, o personagem '+character3+' fez um total de '+xp_ontem3+' xp no dia de ontem.')
-    //  console.log('De acordo com o GuildStats.eu, o personagem '+character4+' fez um total de '+xp_ontem4+' xp no dia de ontem.')
-    //  console.log('De acordo com o GuildStats.eu, o personagem '+character5+' fez um total de '+xp_ontem5+' xp no dia de ontem.')
-    //  console.log('De acordo com o GuildStats.eu, o personagem '+character6+' fez um total de '+xp_ontem6+' xp no dia de ontem.')
-    //  console.log('De acordo com o GuildStats.eu, o personagem '+character7+' fez um total de '+xp_ontem7+' xp no dia de ontem.')
-    // console.log()
-    // console.log()
-    // console.log()
-    // console.log()
 
 
     // await page.waitForSelector('#highscores > div.Border_2 > div > div > form > div > table > tbody > tr > td > div > table > tbody > tr:nth-child(1) > td:nth-child(2) > select');
