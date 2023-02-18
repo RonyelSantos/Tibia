@@ -521,7 +521,7 @@
     </partitioning>
     <fields>
       <field>
-        <name>character</name>
+        <name>char</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -600,7 +600,7 @@
     </fields>
     <data>
       <line>
-        <item>Dreadmawmaw</item>
+        <item>Kresh</item>
       </line>
     </data>
     <attributes/>
@@ -614,6 +614,132 @@
     <GUI>
       <xloc>352</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get system info</name>
+    <type>SystemInfo</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>data_hora</name>
+        <type>system date (variable)</type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JS JSON</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var json = {
+
+	"character": char.toString()
+}
+
+var json = JSON.stringify(json);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>json</name>
+        <rename>json</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>JS MESSAGEM TELEGRAM</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//var message_telegram = "[RPA Scrap IT] \\n Servidor: "+nome+" \\n Player on: "+qtd_player+" \\n Representando: "+representando+" \\n ------------------------ \\n Servidor: "+nome2+" \\n Player on: "+qtd_player2+" \\n Representando: "+representando2+" \\n ------------------------ \\n Servidor: "+nome3+" \\n Player on: "+qtd_player3+" \\n Representando: "+representando3+" \\n ------------------------ \\n Servidor: "+nome4+" \\n Player on: "+qtd_player4+" \\n Representando: "+representando4+" \\n ------------------------ \\n Servidor: "+nome5+" \\n Player on: "+qtd_player5+" \\n Representando: "+representando5+" \\n ------------------------ \\n [Para doações via pix vem de inbox]";
+
+var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName: "+character+"\\nLevel: "+level+"\\nVocation: "+vocation+"\\nWorld: "+world+"\\nSex: "+sex+"\\nGuild: "+guild+"\\nStatus: "+online+"\\nLast Login: "+last_login+"\\nXp feita ontem: "+xp_yesterday+"\\nTotal de xp no mês: "+total_in_month+"\\nRecord de xp: "+record_xp+"\\nÚltima morte: "+last_death;</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>message_telegram</name>
+        <rename>message_telegram</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1408</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -832,101 +958,6 @@
     </GUI>
   </step>
   <step>
-    <name>JS JSON</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var json = {
-
-	"character": char.toString()
-}
-
-var json = JSON.stringify(json);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>json</name>
-        <rename>json</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>JS MESSAGEM TELEGRAM</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>//var message_telegram = "[RPA Scrap IT] \\n Servidor: "+nome+" \\n Player on: "+qtd_player+" \\n Representando: "+representando+" \\n ------------------------ \\n Servidor: "+nome2+" \\n Player on: "+qtd_player2+" \\n Representando: "+representando2+" \\n ------------------------ \\n Servidor: "+nome3+" \\n Player on: "+qtd_player3+" \\n Representando: "+representando3+" \\n ------------------------ \\n Servidor: "+nome4+" \\n Player on: "+qtd_player4+" \\n Representando: "+representando4+" \\n ------------------------ \\n Servidor: "+nome5+" \\n Player on: "+qtd_player5+" \\n Representando: "+representando5+" \\n ------------------------ \\n [Para doações via pix vem de inbox]";
-
-var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName: "+character+"\\nLevel: "+level+"\\nVocation: "+vocation+"\\nWorld: "+world+"\\nSex: "+sex+"\\nGuild: "+guild+"\\nStatus: "+online+"\\nLast Login: "+last_login+"\\nXp feita ontem: "+xp_yesterday+"\\nTotal de xp no mês: "+total_in_month+"\\nRecord de xp: "+record_xp+"\\nÚltima morte: "+last_death;</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>message_telegram</name>
-        <rename>message_telegram</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1408</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>REST RPA</name>
     <type>Rest</type>
     <description/>
@@ -939,7 +970,7 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
     </partitioning>
     <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url>http://167.71.16.201:3300/tibia_scrap</url>
+    <url>${RPA_CHARACTER}</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName/>
@@ -974,6 +1005,164 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace in string</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>sex</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>level</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>world</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string> </replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1280</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>data_hora</name>
+        <rename>data_hora</rename>
+        <type>Timestamp</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd HH:mm:ss</conversion_mask>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1184</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Switch / case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fieldname>status_code</fieldname>
+    <use_contains>N</use_contains>
+    <case_value_type>None</case_value_type>
+    <case_value_format/>
+    <case_value_decimal/>
+    <case_value_group/>
+    <default_target_step/>
+    <cases>
+      <case>
+        <value>200</value>
+        <target_step>WRITE LOG 200</target_step>
+      </case>
+      <case>
+        <value>401</value>
+        <target_step>WRITE LOG 401</target_step>
+      </case>
+      <case>
+        <value>400</value>
+        <target_step>WRITE TO LOG 400</target_step>
+      </case>
+      <case>
+        <value>500</value>
+        <target_step>WRITE TO LOG 500</target_step>
+      </case>
+    </cases>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1033,56 +1222,6 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
     </remotesteps>
     <GUI>
       <xloc>1760</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Switch / case</name>
-    <type>SwitchCase</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fieldname>status_code</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>None</case_value_type>
-    <case_value_format/>
-    <case_value_decimal/>
-    <case_value_group/>
-    <default_target_step/>
-    <cases>
-      <case>
-        <value>200</value>
-        <target_step>WRITE LOG 200</target_step>
-      </case>
-      <case>
-        <value>401</value>
-        <target_step>WRITE LOG 401</target_step>
-      </case>
-      <case>
-        <value>400</value>
-        <target_step>WRITE TO LOG 400</target_step>
-      </case>
-      <case>
-        <value>500</value>
-        <target_step>WRITE TO LOG 500</target_step>
-      </case>
-    </cases>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>720</xloc>
       <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1155,38 +1294,6 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
     </GUI>
   </step>
   <step>
-    <name>WRITE TO LOG 500</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <loglevel>log_level_basic</loglevel>
-    <displayHeader>Y</displayHeader>
-    <limitRows>N</limitRows>
-    <limitRowsNumber>0</limitRowsNumber>
-    <logmessage>500:</logmessage>
-    <fields>
-      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>915</xloc>
-      <yloc>730</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>WRITE TO LOG 400</name>
     <type>WriteToLog</type>
     <description/>
@@ -1219,8 +1326,8 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
     </GUI>
   </step>
   <step>
-    <name>Get system info</name>
-    <type>SystemInfo</type>
+    <name>WRITE TO LOG 500</name>
+    <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1229,12 +1336,13 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
       <method>none</method>
       <schema_name/>
     </partitioning>
+    <loglevel>log_level_basic</loglevel>
+    <displayHeader>Y</displayHeader>
+    <limitRows>N</limitRows>
+    <limitRowsNumber>0</limitRowsNumber>
+    <logmessage>500:</logmessage>
     <fields>
-      <field>
-        <name>data_hora</name>
-        <type>system date (variable)</type>
-      </field>
-    </fields>
+      </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1244,116 +1352,8 @@ var message_telegram = "[RPA Scrap IT]\\nBoletim atualizado "+data_hora+"\\nName
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <select_unspecified>N</select_unspecified>
-      <meta>
-        <name>data_hora</name>
-        <rename>data_hora</rename>
-        <type>Timestamp</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask>yyyy/MM/dd HH:mm:ss</conversion_mask>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1184</xloc>
-      <yloc>368</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Replace in string</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>sex</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string> </replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>level</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string> </replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>world</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string> </replace_string>
-        <replace_by_string/>
-        <set_empty_string>N</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1280</xloc>
-      <yloc>368</yloc>
+      <xloc>915</xloc>
+      <yloc>730</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
