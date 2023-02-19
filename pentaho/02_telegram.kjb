@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>05_TELEGRAM_JOB</name>
+  <name>02_telegram</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -321,7 +321,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/06_TELEGRAM_TRANSFORMATION.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/03_telegram.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

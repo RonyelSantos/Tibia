@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>04_TELEGRAM_EXECUTOR</name>
+  <name>01_telegram</name>
   <description/>
   <extended_description/>
   <job_version/>
@@ -333,7 +333,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <job_object_id/>
-      <filename>${Internal.Entry.Current.Directory}/05_TELEGRAM_JOB.kjb</filename>
+      <filename>${Internal.Entry.Current.Directory}/02_telegram.kjb</filename>
       <jobname/>
       <directory/>
       <arg_from_previous>N</arg_from_previous>
