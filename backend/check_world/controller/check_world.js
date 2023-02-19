@@ -51,7 +51,7 @@ const check_world = async (start) => {
       });
 
       console.log('1. ABRE GUILD STATS')
-      await page.waitForTimeout(5000);
+      // await page.waitForTimeout(5000);
 
       // for (i = 2; i < 84; i++) {
       //     let result = [];
