@@ -5,7 +5,7 @@ const { executablePath } = require('puppeteer')
 
 puppeteer.use(StealthPlugin())
 
-const tibia_scrap = async (character) => {
+const check_character = async (character) => {
 
   console.log('✅-->Robot start working!')
 
@@ -205,4 +205,4 @@ const tibia_scrap = async (character) => {
   }
 }
 
-module.exports = tibia_scrap;
+module.exports = check_character;
